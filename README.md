@@ -26,9 +26,7 @@
 ## 📦 Установка
 
 ```bash
-# Клонирование репозитория
-git clone https://github.com/yourusername/advanced-obfuscator.git
-cd advanced-obfuscator
+cd DevObfuscator
 
 # Установка зависимостей
 pip install pyinstaller  # Для сборки загрузчиков (опционально)
