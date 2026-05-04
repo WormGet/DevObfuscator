@@ -60,4 +60,52 @@ python obfuscator.py
 ╚══════════════════════════════════════════════════════════════╝
 
 
-<details> <summary><b>Почему файл стал больше?</b></summary> <br> Обфускация добавляет дополнительные слои кодирования/сжатия. Multi-Layer методы могут увеличить размер на 50-70%. </details><details> <summary><b>Можно ли использовать для .exe?</b></summary> <br> Да! Режимы 9, 10, 11 специально для конвертации EXE в Python загрузчики. </details><details> <summary><b>Как изменить XOR ключ?</b></summary> <br> В файле замените `b'STATIC_KEY_2024'` на свой ключ в функции `decrypt()`. </details>
+<details>
+<summary><b>❓ Почему файл стал больше?</b></summary>
+<br>
+Обфускация добавляет дополнительные слои кодирования и сжатия. Чем больше слоёв — тем больше итоговый размер.
+<br><br>
+📊 <b>Ориентировочное увеличение:</b>
+<ul>
+  <li>Zlib/Gzip/Lzma: -70% (размер уменьшается)</li>
+  <li>Base64: +33% (увеличивается)</li>
+  <li>Marshal: +10%</li>
+  <li>Multi-Layer (8+ слоёв): +50-70%</li>
+</ul>
+</details>
+
+<br>
+
+<details>
+<summary><b>❓ Можно ли использовать для .exe?</b></summary>
+<br>
+Да! Проект поддерживает конвертацию EXE файлов в Python загрузчики.
+<br><br>
+⚙️ <b>Доступные режимы:</b>
+<ul>
+  <li><b>Режим 9</b> — EXE → Python Stager (простой загрузчик)</li>
+  <li><b>Режим 10</b> — EXE → Resource Injector (XOR шифрование)</li>
+  <li><b>Режим 11</b> — EXE → Shellcode Embedder (фрагментированный)</li>
+</ul>
+</details>
+
+<br>
+
+<details>
+<summary><b>❓ Как изменить XOR ключ?</b></summary>
+<br>
+По умолчанию используется ключ <code>b'STATIC_KEY_2024'</code>. Для повышения безопасности рекомендуется его заменить.
+<br><br>
+🔧 <b>Как изменить:</b>
+<ol>
+  <li>Откройте сгенерированный файл <code>*_stager.py</code></li>
+  <li>Найдите функцию <code>decrypt(data)</code></li>
+  <li>Замените строку:</li>
+</ol>
+
+```python
+# Было:
+key = hashlib.sha256(b'STATIC_KEY_2024').digest()
+
+# Стало (пример):
+key = hashlib.sha256(b'MY_SUPER_SECRET_KEY_9876').digest()
