@@ -38,7 +38,7 @@ pip install pyinstaller  # Для сборки загрузчиков (опци�
 ## 🚀 Запуск
 
 ```bash
-python obfuscator.py
+python main.py
 
 
 
@@ -88,15 +88,6 @@ python obfuscator.py
 
 ---
 
-### 🔑 Как изменить XOR ключ?
-
-По умолчанию используется ключ `b'STATIC_KEY_2024'`. **Рекомендуется заменить его** на свой.
-
-1. Откройте файл `*_stager.py`
-2. Найдите функцию `decrypt(data)`
-3. Замените строку:
-
-```python
 # Было
 key = hashlib.sha256(b'STATIC_KEY_2024').digest()
 
